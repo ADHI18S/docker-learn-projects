@@ -1,14 +1,12 @@
-# Step 1: Use an official Nginx base image
-FROM nginx:alpine
+# syntax=docker/dockerfile:1
+ARG version=alphine
+FROM nginx:${version}
 
-# Step 2: Set the working directory inside the container
 WORKDIR /usr/share/nginx/html
 
-# Step 3: Copy your application files into the container
-COPY ./files /usr/share/nginx/html
+copy ./files /usr/share/nginx/html
 
-# Step 4: Expose port 80 (default port for Nginx)
-EXPOSE 80
+EXPOSE 80/tcp
 
-# Step 5: Start Nginx server (this is the default command, so it's optional to add this line)
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["nginx","-g","daemon off"]
+
